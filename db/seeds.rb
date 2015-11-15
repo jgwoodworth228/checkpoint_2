@@ -15,9 +15,19 @@ User.destroy_all
   u.first_name = Faker::Name.first_name
   u.last_name = Faker::Name.last_name
   u.email = Faker::Internet.email(u.first_name)
+  u.password = '12341234'
   u.telephone = Faker::PhoneNumber.phone_number
   u.save
 end
+
+# Add me as user
+  u = User.new
+  u.first_name = "James"
+  u.last_name = "Woodworth"
+  u.email = "jgwoodworth@gmail.com"
+  u.password = "jimmer13"
+  u.telephone = "224.345.9494"
+  u.save
 
 puts "There are #{User.count} users in the database"
 

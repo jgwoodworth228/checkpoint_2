@@ -47,15 +47,26 @@
           <li><a href="/rails/info">Sitemap</a></li>
         </ul>
 
-        <ul class="nav navbar-nav navbar-right">
-          <li><a href="/users/edit">Dummy Edit Profile Link</a></li>
-          <li><a href="/users/sign_out" data-method="delete" rel="nofollow">Dummy Sign Out Link</a></li>
-        </ul>
-      </div><!-- /.navbar-collapse -->
+<!-- Woodworth added to make nav bar dynamic -->
+      <ul class="nav navbar-nav navbar-right">
+        <% if user_signed_in? %>
+          <li><%= link_to "Signed in as #{current_user.email}", edit_user_registration_path %></li>
+          <li><%= link_to "Sign Out", destroy_user_session_path, method: :delete %></li>
+        <% else %>
+          <li><%= link_to "Sign Up", new_user_registration_path %></li>
+          <li><%= link_to "Sign In", new_user_session_path  %></li>
+        <% end %>
+      </ul>
+    </div><!-- /.navbar-collapse -->
     </div>
   </nav>
 
   <div class="container">
+      <!-- Devise needed notices
+        <p class="notice"><%= notice %></p>
+        <p class="alert"><%= alert %></p>
+     -->
+
     <% if notice.present? %>
       <div class="alert alert-dismissable alert-success">
         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
