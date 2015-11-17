@@ -16,6 +16,7 @@ class UsersController < ApplicationController
     @user.email = params[:email]
     @user.first_name = params[:first_name]
     @user.last_name = params[:last_name]
+    @user.password = params[:password]
     @user.telephone = params[:telephone]
 
     if @user.save

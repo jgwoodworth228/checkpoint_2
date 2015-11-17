@@ -15,15 +15,17 @@
       </tr>
 
       <% @enrollments.each do |enrollment| %>
-      <tr>
-        <td><%= enrollment.user_id %></td>
-        <td><%= enrollment.course_id %></td>
-        <td>
-          <a href="/enrollments/<%= enrollment.id %>" class="btn btn-primary">Show</a>
-          <a href="/enrollments/<%= enrollment.id %>/edit" class="btn btn-warning">Edit</a>
-          <a href="/delete_enrollment/<%= enrollment.id %>" class="btn btn-danger" rel="nofollow">Delete</a>
-        </td>
-      </tr>
+        <% if current_user.id == enrollment.user_id %>
+          <tr>
+            <td><%= enrollment.user_id %></td>
+            <td><%= enrollment.course_id %></td>
+            <td>
+              <a href="/enrollments/<%= enrollment.id %>" class="btn btn-primary">Show</a>
+              <a href="/enrollments/<%= enrollment.id %>/edit" class="btn btn-warning">Edit</a>
+              <a href="/delete_enrollment/<%= enrollment.id %>" class="btn btn-danger" rel="nofollow">Delete</a>
+            </td>
+          </tr>
+        <% end %>
       <% end %>
     </table>
   </div>

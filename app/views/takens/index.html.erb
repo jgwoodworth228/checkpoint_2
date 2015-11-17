@@ -15,15 +15,17 @@
       </tr>
 
       <% @takens.each do |taken| %>
-      <tr>
-        <td><%= taken.user_id %></td>
-        <td><%= taken.course_id %></td>
-        <td>
-          <a href="/takens/<%= taken.id %>" class="btn btn-primary">Show</a>
-          <a href="/takens/<%= taken.id %>/edit" class="btn btn-warning">Edit</a>
-          <a href="/delete_taken/<%= taken.id %>" class="btn btn-danger" rel="nofollow">Delete</a>
-        </td>
-      </tr>
+       <% if current_user.id == taken.user_id %>
+          <tr>
+            <td><%= taken.user_id %></td>
+            <td><%= taken.course_id %></td>
+            <td>
+              <a href="/takens/<%= taken.id %>" class="btn btn-primary">Show</a>
+              <a href="/takens/<%= taken.id %>/edit" class="btn btn-warning">Edit</a>
+              <a href="/delete_taken/<%= taken.id %>" class="btn btn-danger" rel="nofollow">Delete</a>
+            </td>
+          </tr>
+        <% end %>
       <% end %>
     </table>
   </div>
