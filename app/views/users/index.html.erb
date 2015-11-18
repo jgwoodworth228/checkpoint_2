@@ -17,6 +17,7 @@
       </tr>
 
       <% @users.each do |user| %>
+        <% if current_user.id == user.id %>
           <tr>
             <td><%= user.email %></td>
             <td><%= user.first_name %></td>
@@ -24,7 +25,7 @@
             <td><%= user.telephone %></td>
             <td>
               <a href="/users/<%= user.id %>" class="btn btn-primary">Show</a>
-              <% if current_user.id == user.id %>
+
                 <a href="/users/<%= user.id %>/edit" class="btn btn-warning">Edit</a>
                 <a href="/delete_user/<%= user.id %>" class="btn btn-danger" rel="nofollow">Delete</a>
             </td>

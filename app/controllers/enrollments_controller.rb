@@ -17,7 +17,7 @@ class EnrollmentsController < ApplicationController
     @enrollment.course_id = params[:course_id]
 
     if @enrollment.save
-      redirect_to "/enrollments", :notice => "Enrollment created successfully."
+      redirect_to "/courses", :notice => "Enrollment created successfully."
     else
       render 'new'
     end
@@ -45,6 +45,6 @@ class EnrollmentsController < ApplicationController
 
     @enrollment.destroy
 
-    redirect_to "/enrollments", :notice => "Enrollment deleted."
+    redirect_to "/courses", :notice => "Enrollment deleted."
   end
 end

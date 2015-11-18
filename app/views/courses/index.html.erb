@@ -25,14 +25,50 @@
         <td><%= course.course_description %></td>
         <td><%= course.course_creator %></td>
         <td>
-          <a href="/courses/<%= course.id %>" class="btn btn-primary">Show</a>
-          <% if current_user.id == course.course_creator %>
-            <a href="/courses/<%= course.id %>/edit" class="btn btn-warning">Edit</a>
-            <a href="/delete_course/<%= course.id %>" class="btn btn-danger" rel="nofollow">Delete</a>
-          <% end %>
-        </td>
-      </tr>
-      <% end %>
-    </table>
+            <a href="/courses/<%= course.id %>" class="btn btn-primary">Show Course Detail</a>
+
+          <% if user_signed_in? %>
+            <% if current_user.id == course.course_creator %>
+              <a href="/courses/<%= course.id %>/edit" class="btn btn-warning">Edit Course Description</a>
+              <a href="/delete_course/<%= course.id %>" class="btn btn-danger" rel="nofollow">Delete Course</a>
+            <% end %>
+
+              <% enrollment = Enrollment.where(user_id: current_user.id, course_id: course.id).first %>
+              <% if enrollment.present? %>
+                 <a href="/delete_enrollment/<%= enrollment.id %>" class="btn btn-danger" rel="nofollow">Drop Enrollment</a>
+              <% else %>
+                <%= form_tag "/create_enrollment" do %>
+                  <input type="hidden" value="<%= current_user.id %>" name="user_id">
+                  <input type="hidden" value="<%= course.id %>" name="course_id">
+                  <button class="btn btn-success">
+                    <i class="fa fa-plus"></i> Add Enrollment
+                  </button>
+                <% end %>
+              <% end %>
+
+              <% taken = Taken.where(user_id: current_user.id, course_id: course.id).first %>
+              <% if taken.present? %>
+                 <a href="/delete_taken/<%= taken.id %>" class="btn btn-danger" rel="nofollow">Remove from taken list</a>
+              <% else %>
+                <%= form_tag "/create_taken/" do %>
+                  <input type="hidden" value="<%= current_user.id %>" name="user_id">
+                  <input type="hidden" value="<%= course.id %>" name="course_id">
+                  <button class="btn btn-success">
+                    <i class="fa fa-plus"></i> Add to Taken List
+                  </button>
+                <% end %>
+              <% end %>
+
+<!--               <%#= link_to "/delete_enrollment/<%= enrollment.id %>", method: :delete, class: 'btn btn-success', title: 'Drop'  do %>
+                <i class="fa fa-heart"></i> Drop Enrollment -->
+
+
+              <%# end %>
+            <% end %>
+            </td>
+          </tr>
+        <% end %>
+      </table>
+    </end>
   </div>
 </div>

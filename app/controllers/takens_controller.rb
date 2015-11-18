@@ -17,7 +17,7 @@ class TakensController < ApplicationController
     @taken.course_id = params[:course_id]
 
     if @taken.save
-      redirect_to "/takens", :notice => "Taken created successfully."
+      redirect_to "/courses", :notice => "Taken created successfully."
     else
       render 'new'
     end
@@ -45,6 +45,6 @@ class TakensController < ApplicationController
 
     @taken.destroy
 
-    redirect_to "/takens", :notice => "Taken deleted."
+    redirect_to "/courses", :notice => "Taken deleted."
   end
 end
